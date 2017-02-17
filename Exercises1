@@ -1,0 +1,93 @@
+# A.Match_ends
+
+def match_ends(words):
+    cnt = 0
+    for word in words:
+        if len(word) > 1 and word[0] == word[-1]:
+            cnt += 1
+    
+    return cnt
+    
+# B.Front_x
+def front_x(words):
+    lista = []
+    listb = []
+    
+    for word in words:
+        if word.startswith('x'):
+            lista.append(word)
+        else:
+            listb.append(word)
+
+    return sorted (lista) + sorted(listb)
+    
+ # C.sort_last
+def last(t): return t[-1]
+
+def sort_last(tuples):
+    return sorted(tuples, key= last)
+
+# Test Function
+def test(got, expected):
+    prefix = ' OK ' if got == expected else ' X '
+    print ' {} got: {!r} expected: {!r}' .format (prefix, got, expected)
+
+
+#Calls the above functions with interesting inputs.    
+
+def main():
+    print 'match_ends'
+    test(match_ends(['aba', 'xyz', 'aa', 'x', 'bbb']) , 3)
+    test(match_ends(['', 'x', 'xy', 'xyx', 'xx']) , 2)
+    test(match_ends(['aaa', 'be', 'abc', 'hello']) , 1)
+    
+    print
+    print 'front_x'
+    test (front_x(['bbb', 'ccc', 'axx', 'xzz', 'xaa']), 
+         ['xaa', 'xzz', 'axx', 'bbb', 'ccc'])
+    test (front_x(['ccc', 'bbb', 'aaa', 'xcc', 'xaa']), 
+         ['xaa', 'xcc', 'aaa', 'bbb', 'ccc'])
+    test (front_x(['mix', 'xyz', 'apple', 'xanadu', 'aardvark']), 
+         ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
+    print
+    print 'sort_last'
+    test(sort_last([(1, 3), (3, 2), (2, 1)]),
+        [(2, 1), (3, 2), (1, 3)])
+    test(sort_last([(2, 3), (1, 2), (3, 1)]),
+        [(3, 1), (1, 2), (2, 3)])   
+    test(sort_last([(1, 7), (1, 3), (3, 4, 5), (2, 2)]),
+        [(2, 2), (1, 3), (3, 4, 5), (1, 7)])    
+    
+    
+main()    
+
+#remove_adjacent
+
+def remove_adjacent(nums):
+    nodup = []
+    
+    for num in nums:
+        if not(num in nodup):
+            nodup.append(num)
+            
+    return nodup
+
+def main():
+    print 'remove_adjacent'
+    test(remove_adjacent([1,2,2,3]) ,[1,2,3])
+    test(remove_adjacent([1,3,3,3]) , [1,3])
+   
+main()
+    
+#linear_merge
+
+def linear_merge(list1, list2):
+    a = sorted (list1) + sorted(list2)
+    b = sorted(a)
+    return b
+
+def main():
+    print 'Linear_merge'
+    test(linear_merge(['aa','xx','zz'], ['bb','cc']), ['aa','bb','cc','xx','zz'])
+
+main()
